@@ -1,0 +1,23 @@
+List of Sources:
+
+Fundamental Of Futures & Options Markets (J Hull)
+
+Longstaff, Schwartz, Valuing American Options by Simulation
+
+https://on-demand.gputechconf.com/gtc/2014/presentations/S4154-pricing-options-squares-monte-carlo-sims-gpus.pdf
+
+https://arxiv.org/pdf/1810.02071.pdf
+
+https://arxiv.org/pdf/1808.02791.pdf
+
+https://www.math.ucla.edu/~caflisch/Pubs/Pubs2005/KellerMeet2005.pdf
+
+https://cran.r-project.org/web/packages/LSMRealOptions/vignettes/LSMRealOptions.html
+
+https://on-demand.gputechconf.com/gtc/2014/presentations/S4154-pricing-options-squares-monte-carlo-sims-gpus.pdf
+
+https://people.maths.ox.ac.uk/gilesm/mc/module_6/american.pdf
+
+https://www.maths.ox.ac.uk/system/files/attachments/TT18_dissertation_1000246.pdf
+
+
