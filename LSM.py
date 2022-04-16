@@ -26,12 +26,34 @@ def nth_derivative(diff, n):
     sym.diff(diff)
     nth_derivative(new_diff, n - 1)
 
-original_derivative = (x ** n) * (math.e ** (-x))
-nth_derivative(original_derivative, n)
+def chebyshev_polynomial(X, n):
+    return
+
+def chebyshev_polynomial_sums(X,n):
+    result = 0
+    for m in range(0, int(n / 2)):
+        result += math.comb(n, 2*m) * (X ** (n - (2*m))) * ((x ** 2 - 1) ** m)
+    return result
+
+# original_derivative = (x ** n) * (math.e ** (-x))
+# nth_derivative(original_derivative, n)
 
 
-def F(omega, t_k):
+def F_laguerre(omega, t_k):
     # sum from j = 0 to inf of:
     #   a_j * laguerre_j(X)
     # as a_j coefficients are constants
     return 
+
+def F_chebyshev_sum(omega, t_k):
+    # using the first M basis functions
+    result = 0
+    n = 10
+    X = 1
+    a = 1
+    for j in range(0, n):
+        result += a * chebyshev_polynomial_sums(X, n) 
+
+
+
+print(F_chebyshev_sum(1, 1))
