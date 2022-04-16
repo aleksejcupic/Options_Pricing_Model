@@ -1,0 +1,14 @@
+before coding:
+1. read sources
+2. figure out what parameters we need
+3. algorithm
+    a. basis functions
+    b. brownian motion
+4. figure out how to set up python functions and files
+
+after coding:
+5. code it
+6. running tests
+7. plots using matplotlib
+8. possibly use other methods to compare
+9. make presentation 
