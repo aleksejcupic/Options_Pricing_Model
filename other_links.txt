@@ -1,0 +1,8 @@
+summary of least squares monte carlo 
+https://quant.stackexchange.com/questions/46075/least-squares-monte-carlo
+
+computing derivatives using numpy
+https://stackoverflow.com/questions/9876290/how-do-i-compute-derivative-using-numpy
+
+wiki page
+https://en.wikipedia.org/wiki/Monte_Carlo_methods_for_option_pricing

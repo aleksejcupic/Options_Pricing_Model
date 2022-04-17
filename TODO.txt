@@ -1,14 +1,29 @@
-before coding:
-1. read sources
+1. learn about options and LSM
+    longstaff, schwartz chapter 2 is about the valuation algorithm
 2. figure out what parameters we need
-3. algorithm
-    a. basis functions
-    b. brownian motion
+3. algorithm:
+    iteration of 2 step procedure:
+    1. backward induction:
+        value is recursively assigned to every state at each timestep
+        value is defined as least squares regression against market price
+        of the option value at that state and time ( - step) 
+        option value for the regresssion is defined as the value of 
+        exercise possibilities (dependent on market price) plus the value of
+        the timestamp value which that exercise would result in (defined in
+        previous step of the process)
+    2. when all states are valued for every timestep, value of the option is
+        calculated by moving through the timesteps and states by making an optimal
+        decision on option exercise at every step on the hand of the price path
+        and the value of the state that would result in
+        can be done with multiple price paths to add a stochastic effect to the procedure
+    blocks to algorithm:
+        # unsure about this
+        a. basis functions
+        b. brownian motion?
+        c. regression?
 4. figure out how to set up python functions and files
-
-after coding:
 5. code it
-6. running tests
+6. running tests for sample data
 7. plots using matplotlib
 8. possibly use other methods to compare
-9. make presentation 
+9. make presentation

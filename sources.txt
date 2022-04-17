@@ -25,3 +25,6 @@ http://www.option-price.com
 https://colab.research.google.com/drive/18qQZQ-eAr23LSRvLJlGsMIRr6OVmG4VW?usp=sharing#scrollTo=LXmoy2CQkhGF
 
 https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.128.1853&rep=rep1&type=pdf
+
+https://en.wikipedia.org/wiki/Monte_Carlo_methods_for_option_pricing
+

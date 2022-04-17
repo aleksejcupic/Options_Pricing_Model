@@ -9,6 +9,9 @@
 # IMPORTS
 import math
 import sympy as sym
+# numpy or sympy??
+import matplotlib.pyplot as plot
+# maybe need import statmodels
 
 # GLOBAL VARIABLES FOR TESTING:
 x = 0
