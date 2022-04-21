@@ -1,4 +1,4 @@
-# only works on arm64, not x86
+# pandas and matplotlib only work on arm64, not x86
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,7 +9,7 @@ N = 3
 dt = T/N
 M = 200
 S = np.zeros(shape=(M, N+1))
-S[:, 0] = 1 # random starting price
+S[:, 0] = 1 # starting price of the underlying asset
 
 k = 1.1
 mu = 0.06
@@ -19,6 +19,9 @@ for i in range(1, N+1):
   dz = np.random.normal(size=M) * np.sqrt(dt)
   dS = ((mu * dt) + (si * dz)) * S[:, i-1]
   S[:, i] = S[:, i-1] + dS
+
+
+print(S)
 
 df = pd.DataFrame(S)
 

@@ -1,0 +1,13 @@
+Monte Carlo Approach steps:
+1.	Simulate sample paths of underlying asset prices (and interest rates) over the relevant time horizon (simulate according to risk-neutral measure)
+2.	Evaluate discounted cash flows of a security on each sample path (as determined by structure of the security in question)
+3.	Avg. discounted cash flows over sample paths 
+
+Iteration of a 2 step procedure:
+1.	Backward induction:
+a.	Value is recursively assigned to every state at each timestep
+b.	Defined as least squares regression against market price of the option value at that state and time (-step)
+c.	Defined as value of exercise possibilities (dependent on market price + value of timestep which that exercise would result in (defined in previous step)
+2.	Value of option is calculated by moving through the timesteps and states by making an optimal decision on option exercise at every step (multiple price paths)
+
+

@@ -9,19 +9,21 @@
 # IMPORTS
 import math
 import sympy as sym
+import numpy 
 # numpy or sympy??
-import matplotlib.pyplot as plot
+# import matplotlib.pyplot as plot
 # maybe need import statmodels
 
 # GLOBAL VARIABLES FOR TESTING:
-x = 0
+
+# making an array of paths:
 k = 10 # number of discretization points
     # time points that the option can be exercised
-b = 10 # number of basis functions used
-p = 3 # number of paths that the price of the
-    # underlying asset can take from each t_k to t_k+1
-n = 100 
+p = 10 # number of paths of the underlying asset
 
+x = 0
+b = 10 # number of basis functions used
+n = 100 
 random_varible = 1 # X
 
 
@@ -68,7 +70,28 @@ def F_chebyshev_sum(omega, t_k):
 
 
 # MAIN - TESTING 
-print(F_chebyshev_sum(1, 1))
+# making the array of paths
+PATHS = numpy.zeros((p, k + 1))
+PATHS[:, 0] = 1
+
+# filling the array with paths:
+    # some variables for now?
+T = 1
+N = 3
+dt = T/N
+r = 0.06
+sigma = 0.3
+
+for i in range(1, k + 1):
+    dZ = numpy.random.normal(p) * numpy.sqrt(dt) # standard Brownian motion
+    dS = PATHS[:, i - 1] * ((r * dt) + (sigma * dZ)) 
+    PATHS[:, i] = PATHS[:, i -1] + dS
+
+
+print(PATHS)
+
+
+# print(F_chebyshev_sum(1, 1))
 
 # original_derivative = (x ** n) * (math.e ** (-x))
 # nth_derivative(original_derivative, n)
