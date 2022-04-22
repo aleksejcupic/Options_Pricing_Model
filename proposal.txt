@@ -1,0 +1,15 @@
+Final Project: Implementing an American-style option pricing model by Least Squares Monte Carlo simulation
+TO DO:
+1. Learn about the American-style Option and the Least Squares Monte Carlo algorithm.
+The method is discussed in Longstaff, Schwartz, Valuing American Options by
+Simulation: A Simple Least-Squares Approach.
+2. Using parameters such as current stock price, intrinsic value, time to expiration,
+volatility, interest rates, and cash dividends paid, we will calculate a probability that the option will be “in the money” at each time and whether or not it is better to “cash out” or let the option expire. We will implement the pricing model’s formulas found in Longstaff’s and Schwartz’s work using Python.
+3. Monte Carlo simulation can be done with 3 different variables:
+a. Number of discretization points (time points that the option can be exercised; in
+practice, this number is infinite since options are continuously exercisable)
+b. Number of basis functions (Using Laguerre polynomials)
+c. Number of paths that the price of the underlying asset can take from each tk to tk+1.
+4. We will make our graphs of the model using Matplotlib, a Python library.
+5. We will make a presentation summarizing our findings, and compare our pricing model
+with other methods, as well as newer versions of the Least Squares Algorithm.

@@ -23,7 +23,7 @@ def optionValue(S0, vol, T, K=40, M=50, I=4096, r=0.06):
         V[t, :] = np.where(h[t, :] > C, h[t, :],
                          V[t + 1, :] * df)  # exercise decision/optimization
     V0 = np.sum(V[1, :] * df) / I  # LSM estimator
-    print "S0 %4.1f|vol %4.2f|T %2.1f| Option Value %8.3f" % (S0, vol, T, V0)
+    print("S0 %4.1f|vol %4.2f|T %2.1f| Option Value %8.3f" % (S0, vol, T, V0))
     return V0
 
 def seqValue():
@@ -38,7 +38,7 @@ from time import time
 t0 = time()
 optionValues = seqValue()  # calculate all values
 t1 = time(); d1 = t1 - t0
-print "Duration in Seconds %6.3f" % d1
+print("Duration in Seconds %6.3f" % d1)
 
 # in the shell ...
 ####
@@ -66,14 +66,14 @@ def parValue():
 
 def execution():
     optionValues = parValue()  # calculate all values
-    print "Submitted tasks %d" % len(optionValues)
+    print("Submitted tasks %d" % len(optionValues))
     c.wait(optionValues)
     # wait for all tasks to be finished
     return optionValues
 t0 = time()
 optionValues = execution()
 t1 = time(); d2 = t1 - t0
-print "Duration in Seconds %6.3f" % d2
+print("Duration in Seconds %6.3f" % d2)
 
 d1 / d2  # speed-up of parallel execution
 
@@ -82,5 +82,4 @@ optionValues[0].result
 optionValues[0].metadata
 
 for result in optionValues:
-    print result.metadata['stdout'],
-
+    print(result.metadata['stdout'],)

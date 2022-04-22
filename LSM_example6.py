@@ -1,5 +1,5 @@
-    """ AMERICAN OPTION PRICING BY LEAST SQUARES MONTE CARLO, FINITE DIFFERENCE, ANALYTICAL AND BINOMIAL METHODS """
-
+    # """ AMERICAN OPTION PRICING BY LEAST SQUARES MONTE CARLO, FINITE DIFFERENCE, ANALYTICAL AND BINOMIAL METHODS """
+# need arm64, not x86
 from numpy import zeros, concatenate, sqrt, exp, maximum, polyfit, polyval, shape, where, sum, argsort, random, \
     RankWarning, put, nonzero
 from zlib import compress
