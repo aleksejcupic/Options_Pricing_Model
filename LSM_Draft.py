@@ -71,24 +71,31 @@ def F_chebyshev_sum(omega, t_k):
 
 # MAIN - TESTING 
 # making the array of paths
-PATHS = numpy.zeros((p, k + 1))
-PATHS[:, 0] = 1
+M = 200
+TABLE = numpy.zeros((M, k + 1))
+TABLE[:, 0] = 1
 
 # filling the array with paths:
     # some variables for now?
-T = 1
-N = 3
-dt = T/N
-r = 0.06
+
+T = 1 # time from 'now' to expiration of option in years 
+N = 3 # number of time steps 
+dt = T/N # time between each time step 
+r = 0.06 # risk free rate (%)
 sigma = 0.3
 
+#S = 100 # stock price 
+K = 0.98           #strike price
+
+# filling the table standard Brownian motion
 for i in range(1, k + 1):
-    dZ = numpy.random.normal(p) * numpy.sqrt(dt) # standard Brownian motion
-    dS = PATHS[:, i - 1] * ((r * dt) + (sigma * dZ)) 
-    PATHS[:, i] = PATHS[:, i -1] + dS
+    dZ = numpy.random.normal(size=M) * numpy.sqrt(dt) 
+    # see eq 7 in longstaff-shcwartz 2001
+    dS = TABLE[:, i - 1] * ((r * dt) + (sigma * dZ)) 
+    TABLE[:, i] = TABLE[:, i -1] + dS
 
+print(TABLE)
 
-print(PATHS)
 
 
 # print(F_chebyshev_sum(1, 1))
