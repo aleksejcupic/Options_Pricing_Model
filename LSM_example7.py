@@ -19,6 +19,8 @@ market_value = 3.86 #market price of option
 T = ((datetime.date(2022,3,17)-datetime.date.today()).days+1)/365    #time in years
 print(T)
 
+#---------------------------------------------------------
+# SLOW METHOD
 # Precompute constants
 dt = T/N
 nudt = (r - 0.5*vol**2)*dt
@@ -47,6 +49,8 @@ SE = sigma/np.sqrt(M)
 
 print("Call value is ${0} with SE +/- {1}".format(np.round(C0,2),np.round(SE,2)))
 
+#---------------------------------------------------------
+# FAST METHOD
 #precompute constants
 dt = T/N
 nudt = (r - 0.5*vol**2)*dt
@@ -69,6 +73,8 @@ SE = sigma/np.sqrt(M)
 
 print("Call value is ${0} with SE +/- {1}".format(np.round(C0,2),np.round(SE,2)))
 
+
+#---------------------------------------------------------
 #precompute constants
 N = 1
 dt = T/N
@@ -92,6 +98,8 @@ SE = sigma/np.sqrt(M)
 
 print("Call value is ${0} with SE +/- {1}".format(np.round(C0,2),np.round(SE,2)))
 
+
+#---------------------------------------------------------
 x1 = np.linspace(C0-3*SE, C0-1*SE, 100)
 x2 = np.linspace(C0-1*SE, C0+1*SE, 100)
 x3 = np.linspace(C0+1*SE, C0+3*SE, 100)

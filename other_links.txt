@@ -6,3 +6,6 @@ https://stackoverflow.com/questions/9876290/how-do-i-compute-derivative-using-nu
 
 wiki page
 https://en.wikipedia.org/wiki/Monte_Carlo_methods_for_option_pricing
+
+example 7 explaination
+https://www.youtube.com/watch?v=pR32aii3shk

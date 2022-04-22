@@ -1,0 +1,14 @@
+what some of the examples use:
+sympy 
+numpy
+pandas
+matplotlib
+statsmodels
+QuantLib
+scipy
+pandas_datareader
+
+jupyter
+IPython
+pylab
+zlib
