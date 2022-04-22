@@ -1,3 +1,4 @@
+
 def optionValue(S0, vol, T, K=40, M=50, I=4096, r=0.06):
     import numpy as np
     np.random.seed(150000)  # fix the seed for every valuation

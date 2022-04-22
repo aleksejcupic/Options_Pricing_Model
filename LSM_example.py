@@ -1,4 +1,4 @@
-# pandas and matplotlib only work on arm64, not x86
+# only works on arm64, not x86
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt

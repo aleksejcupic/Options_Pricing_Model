@@ -1,3 +1,4 @@
+# only works on arm64, not x86
 # Import dependencies
 import math
 import numpy as np

@@ -1,4 +1,4 @@
-# need arm64, not x86
+# only works on arm64, not x86
 import math
 import random
 import pylab
