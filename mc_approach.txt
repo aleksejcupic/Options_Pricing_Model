@@ -11,3 +11,20 @@ c.	Defined as value of exercise possibilities (dependent on market price + value
 2.	Value of option is calculated by moving through the timesteps and states by making an optimal decision on option exercise at every step (multiple price paths)
 
 
+Pseudocode version of LSM:
+1. Generate matrix W(n,m) of random numbers drawn from a standard normal distribution
+2. using W, simulate (by forward induction) n independent paths S_0,j,...S_m-1,j, j=0,...n-1 of geometric brownian motion 
+    stochastic processes for the underlying asset prices
+3. at the last step m-1 (at maturity T) compute the option value ^V_m,j = p_m(S_m,j), j=0,...n-1 applying the payoff function p at the last step m-1
+4. apply backward induction for each step i=m-2,...1 to compute cashflows:
+    a) select the ITM paths
+    b) build the matrix psi_i from asset prices S_iand the right hand side cashflows vector 
+        ^V_i+1 only for the ITM paths for the least-square linear equation psi_i(S_i)beta_i = ^V_i+1(S_i+1)
+    c) use regression to calculate ^beta_i by solving a pseudo-inverse psi(S_i)^t = (psi(S_i)^T * psi(S_i))^-1 * psi(S_i)^T in 
+        ^beta_i = psi(S_i)^t * ^V_i+1(S_i+1)
+    d) approximate the continuation function ^C_i(S_i) = ^beta_i * psi(S_i)^T
+    e) decide to early-exercise based on the value of the continuation function ^C_i for each ITM path j:
+        ^V_i,j = { p_I(S_i,j) for p_i(S_i,j) >= ^C_i(S_i,j), 
+                   ^V_i+1,j   for p_i(S_i,j) < ^C_i(S_i,j)}
+5. return ^V_0 = (^V_1,0 + ... + ^V_1,n-1) / n discounted to time step i = 0 
+
