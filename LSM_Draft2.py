@@ -2,6 +2,8 @@ import numpy
 import pandas as pd
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
+import math
+import scipy
 
 N = 10 # number of time steps, number of discretization points, time points that the option can be exercised
 M = 200 # number of paths of the underlying asset
@@ -25,6 +27,9 @@ for i in range(1, N + 1):
 print(TABLE)
 
 
+def f(X, n):
+    return X ** n * numpy.exp(-X)
+
 # df = pd.DataFrame(TABLE)
 k = 1.1
 # df.transpose().plot(color="red", alpha=0.3)
@@ -35,38 +40,51 @@ k = 1.1
 # discounting the payoff
 df = pd.DataFrame(TABLE)
 for i in range(1):
-    Y = (k - df[N]).map(lambda v: max(v, 0))
-    # Y = []
-    # for i in range(0, M):
-    #     price = TABLE[i][N] - k
-    #     if price > 0:
-    #         Y.append(price)
-    #     else:
-    #         Y.append(0)
-    discount = numpy.exp(-mu * 1)
-    Y = Y * discount
+    Y = pd.DataFrame()
+    #(k - df[N]).map(lambda v: max(v, 0))
+    for i in range(0, M):
+        price = TABLE[i][N] - k
+        if price > 0:
+            Y.append(price)
+        else:
+            Y.append(0)
+    # discount = numpy.exp(-mu * 1)
+    # Y = Y * discount
     X = TABLE[N-1]
     ITM = X < k
     X = X[ITM]
     Y = Y[ITM]
+
+    # laguerre polynomials 
     poly = pd.DataFrame(index=X.index)
-    poly[0] = 1
-    poly[1] = numpy.cos(X)
-    poly[2] = numpy.sin(X)
+    n = 10
+    for i in range(0,n):
+        poly[i] = numpy.exp(-X/2) * numpy.exp(X) / math.factorial(i) * scipy.derivative(f(X,i), X, dx=1e-6, n=i)
+    # poly[0] = numpy.exp(-X/2)
+    # poly[1] = numpy.exp(-X/2) * (1 - X)
+    # poly[2] = numpy.exp(-X/2) * (1 - (2*X) + (X**2 / 2))
+
+    # stats model 
     model = sm.OLS(Y, poly)
     res = model.fit()
     coef = res.params
+
+    # determining whether continuing is better or not 
     continuation = (poly * coef).sum(axis=1)
     exercise = (k - TABLE[N-1][ITM])
     x = numpy.linspace(.5, 1.5, 100)
-    y = 1 * coef[0] + numpy.cos(x) * coef[1] + numpy.sin(x) * coef[2]
+    y = 0
+    for i in range(0, n):
+        y += poly[i] * coef[i]
     continued = continuation > exercise
     continued = continued.reindex(TABLE.index).fillna(True)
     print(continued)
 
+    plt.figure(figsize=(10,10))
+    plt.plot(x,y, linestyle=":", color="blue")
 
-SK = 1.05 # strike price 
-IN_THE_MONEY = TABLE > SK
-# print(IN_THE_MONEY)
+    plt.scatter(X, Y, color="red", label="Y (discounted exercise later)")
 
-# check if continuing is more profitable than exercising that that point
+    plt.scatter(X, continuation, label="continuation", marker="x", color="blue")
+    plt.scatter(X, exercise, label="exercise now", marker="+", color="green")
+    plt.legend()
