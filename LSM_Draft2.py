@@ -33,16 +33,17 @@ k = 1.1
 # plt.show()
 
 # discounting the payoff
+df = pd.DataFrame(TABLE)
 for i in range(1):
-    Y = []
-    for i in range(0, M):
-        price = TABLE[i][N] - k
-        if price > 0:
-            Y.append(price)
-        else:
-            Y.append(0)
-    
-    discount = numpy.exp(-mu)
+    Y = (k - df[N]).map(lambda v: max(v, 0))
+    # Y = []
+    # for i in range(0, M):
+    #     price = TABLE[i][N] - k
+    #     if price > 0:
+    #         Y.append(price)
+    #     else:
+    #         Y.append(0)
+    discount = numpy.exp(-mu * 1)
     Y = Y * discount
     X = TABLE[N-1]
     ITM = X < k
@@ -62,7 +63,6 @@ for i in range(1):
     continued = continuation > exercise
     continued = continued.reindex(TABLE.index).fillna(True)
     print(continued)
-
 
 
 SK = 1.05 # strike price 
