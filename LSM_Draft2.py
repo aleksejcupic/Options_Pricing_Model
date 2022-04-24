@@ -1,6 +1,6 @@
 import numpy
-import pandas as pd
-import matplotlib.pyplot as plt
+# import pandas as pd
+# import matplotlib.pyplot as plt
 
 N = 10 # number of time steps, number of discretization points, time points that the option can be exercised
 M = 200 # number of paths of the underlying asset
@@ -24,15 +24,20 @@ for i in range(1, N + 1):
 print(TABLE)
 
 
-df = pd.DataFrame(TABLE)
+# df = pd.DataFrame(TABLE)
 k = 1.1
-df.transpose().plot(color="red", alpha=0.3)
-plt.legend([])
-plt.plot([0,N], [k, k], label="strke price")
-plt.show()
+# df.transpose().plot(color="red", alpha=0.3)
+# plt.legend([])
+# plt.plot([0,N], [k, k], label="strke price")
+# plt.show()
 
-df
+# df
 # discounting the payoff
+Y = []
+for i in range(0, N):
+    Y.append(max(k - TABLE[N][i], 0))
+    
+print(Y)
 SK = 1.05 # strike price 
 IN_THE_MONEY = TABLE > SK
 # print(IN_THE_MONEY)
