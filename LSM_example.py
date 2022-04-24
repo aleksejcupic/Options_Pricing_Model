@@ -60,9 +60,10 @@ plt.scatter(X, Y)
 
 poly = pd.DataFrame(index=X.index)
 
-poly[0] = 1
-poly[1] = np.cos(X)
-poly[2] = np.sin(X)
+poly[0] = np.exp(-X / 2)
+poly[1] = np.exp(-X / 2) * (1 - X) 
+poly[2] = np.exp(-X / 2) * (1 - 2 * X + X ** 2 / 2) 
+
 # poly[3] = np.cos(2*X)
 # poly[4] = np.sin(2*X)
 
@@ -71,6 +72,9 @@ poly
 model = sm.OLS(Y, poly)
 res = model.fit()
 coef = res.params
+print("----")
+print(coef, res)
+print("----")
 
 
 continuation = (poly * coef).sum(axis=1)
