@@ -25,10 +25,10 @@ print(S)
 
 df = pd.DataFrame(S)
 
-df.transpose().plot(color="red", alpha=0.3)
-plt.legend([])
-plt.plot([0,N], [k, k], label="strke price")
-plt.show()
+# df.transpose().plot(color="red", alpha=0.3)
+# plt.legend([])
+# plt.plot([0,N], [k, k], label="strke price")
+# plt.show()
 
 df
 
@@ -56,7 +56,7 @@ Y = Y[ITM]
 
 Y
 
-plt.scatter(X, Y)
+# plt.scatter(X, Y)
 
 poly = pd.DataFrame(index=X.index)
 
@@ -95,6 +95,7 @@ plt.scatter(X, Y, color="red", label="Y (discounted exercise later)")
 plt.scatter(X, continuation, label="continuation", marker="x", color="blue")
 plt.scatter(X, exercise, label="exercise now", marker="+", color="green")
 plt.legend()
+plt.show()
 
 
 continued = continuation > exercise
