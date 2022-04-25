@@ -7,7 +7,7 @@ from scipy.misc import derivative
 
 N = 1000 # number of time steps, number of discretization points, time points that the option can be exercised
 M = 1000 # number of paths of the underlying asset
-BF = 20 # number of basis functions used
+BF = 20 # number of basis functions used, pandas cannot handle more than 20
 T = 1 # time from 'now' to expiration of option in years 
 dt = T/N # time between each time step 
 
