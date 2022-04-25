@@ -12,3 +12,13 @@ jupyter
 IPython
 pylab
 zlib
+
+
+
+FOR OUR WORK:
+import numpy
+import pandas
+import matplotlib.pyplot
+import statsmodels.api
+import math
+from scipy.misc import derivative

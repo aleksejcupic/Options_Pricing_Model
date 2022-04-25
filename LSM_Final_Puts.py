@@ -29,8 +29,6 @@ for i in range(1, N + 1):
     TABLE[:, i] = TABLE[:, i -1] + dS
 
 # print(TABLE)
-n = BF
-
 # part of laguerre weighted polynomial function 
 def f(X):
     return X ** n * numpy.exp(-X)
@@ -38,6 +36,8 @@ def f(X):
 # creation of dataframe data type in order to 
 # use with stats model functions 
 TABLE_DF = pandas.DataFrame(TABLE)
+
+# plotting the Brownian motion table
 TABLE_DF.transpose().plot(color="red", alpha=0.1)
 matplotlib.pyplot.legend([])
 matplotlib.pyplot.plot([0,N], [STRIKE_PRICE, STRIKE_PRICE], label="strke price")
@@ -84,10 +84,9 @@ for i in range(1, N):
     x = numpy.linspace(0.5, 1.2, len(y))
     continued = continuation > exercise
     continued = continued.reindex(TABLE_DF.index).fillna(True)
-    # Y[continued] = 0
+    Y[continued] = 0
 
     # plotting the graph
-    print("N-i: ", N-i)
     matplotlib.pyplot.figure(figsize=(10,10))
     matplotlib.pyplot.plot(x,y, linestyle=":", color="blue")
     matplotlib.pyplot.xlabel(f"price at {N-i-1}", fontdict=None, labelpad=None, loc=None)
