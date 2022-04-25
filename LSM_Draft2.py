@@ -5,7 +5,7 @@ import statsmodels.api
 import math
 from scipy.misc import derivative
 
-N = 1000 # number of time steps, number of discretization points, time points that the option can be exercised
+N = 100 # number of time steps, number of discretization points, time points that the option can be exercised
 M = 1000 # number of paths of the underlying asset
 BF = 20 # number of basis functions used, pandas cannot handle more than 20
 T = 1 # time from 'now' to expiration of option in years 
@@ -83,21 +83,19 @@ for i in range(1, N):
     # see eq 6 in Longstaff, Schwartz 2001
     for p in range(0, n):
         y += poly[p] * coef[p]
-    x = numpy.linspace(0.5, 1.5, len(y))
+    x = numpy.linspace(0.5, 1.2, len(y))
     continued = continuation > exercise
     continued = continued.reindex(TABLE_DF.index).fillna(True)
     print(continued)
-    Y[continued] = 0
-    print("x: ", x, "y: ", y)
-    # plotting the graph
-    # TABLE_DF.transpose().plot(color="red", alpha=0.3)
+    # Y[continued] = 0
 
+    # plotting the graph
     matplotlib.pyplot.figure(figsize=(10,10))
     matplotlib.pyplot.plot(x,y, linestyle=":", color="blue")
-
-    matplotlib.pyplot.scatter(X, Y, color="red", label="Y (discounted exercise later)")
-
-    matplotlib.pyplot.scatter(X, continuation, label="continuation", marker="x", color="blue")
+    matplotlib.pyplot.xlabel("price at N - 1", fontdict=None, labelpad=None, loc=None)
+    matplotlib.pyplot.ylabel("amount profit at N", fontdict=None, labelpad=None, loc=None)
+    matplotlib.pyplot.scatter(X, Y, color="red", label="Y (actual value that was gotten later (discounted, exercise later)")
+    matplotlib.pyplot.scatter(X, continuation, label="continuation, theoretical", marker="x", color="blue")
     matplotlib.pyplot.scatter(X, exercise, label="exercise now", marker="+", color="green")
     matplotlib.pyplot.legend()
     matplotlib.pyplot.show()
