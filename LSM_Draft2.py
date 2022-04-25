@@ -5,9 +5,9 @@ import statsmodels.api
 import math
 from scipy.misc import derivative
 
-N = 100 # number of time steps, number of discretization points, time points that the option can be exercised
-M = 100 # number of paths of the underlying asset
-BF = 10 # number of basis functions used
+N = 1000 # number of time steps, number of discretization points, time points that the option can be exercised
+M = 1000 # number of paths of the underlying asset
+BF = 20 # number of basis functions used
 T = 1 # time from 'now' to expiration of option in years 
 dt = T/N # time between each time step 
 
@@ -41,7 +41,7 @@ TABLE_DF = pandas.DataFrame(TABLE)
 
 # loop for backward induction on each time step from N to 0
 # this is for put options
-for i in range(1, N - 1):
+for i in range(1, N):
     print(i)
     # Y is the array of profit at time step N - i 
     Y = (STRIKE_PRICE - TABLE_DF[N - i]).map(lambda v: max(v, 0))
@@ -62,7 +62,7 @@ for i in range(1, N - 1):
     # polys are recreated at each iteration because indicies may change
     for i in range(0, n):
         n = i
-        poly[i] = numpy.exp(-X/2) * numpy.exp(X) / math.factorial(i) * derivative(f, X, dx=1e-6, n=i, order=15)
+        poly[i] = numpy.exp(-X/2) * numpy.exp(X) / math.factorial(i) * derivative(f, X, dx=1e-6, n=i, order=BF+1)
 
     # stats model 
     model = statsmodels.api.OLS(Y, poly)
@@ -73,12 +73,12 @@ for i in range(1, N - 1):
     continuation = (poly * coef).sum(axis=1)
     exercise = (STRIKE_PRICE - TABLE_DF[N - i][IN_THE_MONEY])
 
-    x = numpy.linspace(0.5, 1.5, 100)
+
     y = 0
     # see eq 6 in Longstaff, Schwartz 2001
     for p in range(0, n):
         y += poly[p] * coef[p]
-
+    x = numpy.linspace(0.5, 1.5, len(y))
     continued = continuation > exercise
     continued = continued.reindex(TABLE_DF.index).fillna(True)
     print(continued)
@@ -86,10 +86,7 @@ for i in range(1, N - 1):
     print("x: ", x, "y: ", y)
     # plotting the graph
     # TABLE_DF.transpose().plot(color="red", alpha=0.3)
-    # matplotlib.pyplot.legend([])
-    # matplotlib.pyplot.plot([0,N], [STRIKE_PRICE, STRIKE_PRICE], label="strke price")
-    # matplotlib.pyplot.show()
-    # matplotlib.pyplot.scatter(X, Y)
+
     matplotlib.pyplot.figure(figsize=(10,10))
     matplotlib.pyplot.plot(x,y, linestyle=":", color="blue")
 
@@ -98,6 +95,7 @@ for i in range(1, N - 1):
     matplotlib.pyplot.scatter(X, continuation, label="continuation", marker="x", color="blue")
     matplotlib.pyplot.scatter(X, exercise, label="exercise now", marker="+", color="green")
     matplotlib.pyplot.legend()
+    matplotlib.pyplot.show()
 
 
 

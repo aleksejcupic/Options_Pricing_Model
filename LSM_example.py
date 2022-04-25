@@ -72,11 +72,13 @@ continuation = (poly * coef).sum(axis=1)
 exercise = (k - df[N-1][ITM])
 
 
-x = np.linspace(.5, 1.5, 100)
+
 # y = 1 * coef["x0"] + x * coef["x"] + x**2 * coef["x2"]# + x**3 * coef["x3"]
 
 y = np.exp(-X / 2) * coef[0] + np.exp(-X / 2) * (1 - X)  * coef[1] + np.exp(-X / 2) * (1 - 2 * X + X ** 2 / 2)  * coef[2]# + np.cos(2*x) * coef[3] + np.sin(2*x) * coef[4]
-
+print("y: ", y)
+x = np.linspace(y[0], y[0] + 1, len(y))
+print("x: ", x)
 plt.figure(figsize=(10,10))
 plt.plot(x,y, linestyle=":", color="blue")
 
