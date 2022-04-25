@@ -1,7 +1,7 @@
 import numpy
-import pandas as pd
-import matplotlib.pyplot as plt
-import statsmodels.api as sm
+import pandas
+import matplotlib.pyplot
+import statsmodels.api
 import math
 from scipy.misc import derivative
 
@@ -37,7 +37,7 @@ def f(X):
 
 # creation of dataframe data type in order to 
 # use with stats model functions 
-TABLE_DF = pd.DataFrame(TABLE)
+TABLE_DF = pandas.DataFrame(TABLE)
 
 # loop for backward induction on each time step from N to 0
 # this is for put options
@@ -54,7 +54,7 @@ for i in range(0, N - 1):
 
     # laguerre polynomials 
     # poly is also a dataframe data type 
-    poly = pd.DataFrame(index=X.index)
+    poly = pandas.DataFrame(index=X.index)
     n = BF
 
     # see eq 5 in longstaff-schwartz 2001
@@ -64,7 +64,7 @@ for i in range(0, N - 1):
         poly[i] = numpy.exp(-X/2) * numpy.exp(X) / math.factorial(i) * derivative(f, X, dx=1e-6, n=i, order=15)
 
     # stats model 
-    model = sm.OLS(Y, poly)
+    model = statsmodels.OLS(Y, poly)
     res = model.fit()
     coef = res.params
 
@@ -83,14 +83,14 @@ for i in range(0, N - 1):
     Y[continued] = 0
 
     # plotting the graphs
-    """plt.figure(figsize=(10,10))
-    plt.plot(x,y, linestyle=":", color="blue")
+    """matplotlib.figure(figsize=(10,10))
+    matplotlib.plot(x,y, linestyle=":", color="blue")
 
-    plt.scatter(X, Y, color="red", label="Y (discounted exercise later)")
+    matplotlib.scatter(X, Y, color="red", label="Y (discounted exercise later)")
 
-    plt.scatter(X, continuation, label="continuation", marker="x", color="blue")
-    plt.scatter(X, exercise, label="exercise now", marker="+", color="green")
-    plt.legend()"""
+    matplotlib.scatter(X, continuation, label="continuation", marker="x", color="blue")
+    matplotlib.scatter(X, exercise, label="exercise now", marker="+", color="green")
+    matplotlib.legend()"""
 
 
 
@@ -110,7 +110,7 @@ for i in range(0, N - 1):
 
     # laguerre polynomials 
     # poly is also a dataframe data type 
-    poly = pd.DataFrame(index=X.index)
+    poly = pandas.DataFrame(index=X.index)
     n = BF
 
     # see eq 5 in longstaff-schwartz 2001
@@ -120,7 +120,7 @@ for i in range(0, N - 1):
         poly[i] = numpy.exp(-X/2) * numpy.exp(X) / math.factorial(i) * derivative(f, X, dx=1e-6, n=i, order=15)
 
     # stats model 
-    model = sm.OLS(Y, poly)
+    model = statsmodels.OLS(Y, poly)
     res = model.fit()
     coef = res.params
 
@@ -139,11 +139,11 @@ for i in range(0, N - 1):
     Y[continued] = 0
 
     # plotting the graphs
-    """plt.figure(figsize=(10,10))
-    plt.plot(x,y, linestyle=":", color="blue")
+    """matplotlib.figure(figsize=(10,10))
+    matplotlib.plot(x,y, linestyle=":", color="blue")
 
-    plt.scatter(X, Y, color="red", label="Y (discounted exercise later)")
+    matplotlib.scatter(X, Y, color="red", label="Y (discounted exercise later)")
 
-    plt.scatter(X, continuation, label="continuation", marker="x", color="blue")
-    plt.scatter(X, exercise, label="exercise now", marker="+", color="green")
-    plt.legend()"""
+    matplotlib.scatter(X, continuation, label="continuation", marker="x", color="blue")
+    matplotlib.scatter(X, exercise, label="exercise now", marker="+", color="green")
+    matplotlib.legend()"""
