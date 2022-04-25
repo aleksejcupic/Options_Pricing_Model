@@ -91,7 +91,7 @@ for i in range(1, N):
     matplotlib.pyplot.plot(x,y, linestyle=":", color="blue")
     matplotlib.pyplot.xlabel(f"price at {N-i-1}", fontdict=None, labelpad=None, loc=None)
     matplotlib.pyplot.ylabel(f"amount profit at {N-i}", fontdict=None, labelpad=None, loc=None)
-    matplotlib.pyplot.title(f'Calls with starting price: {PRICE} and strike price: {STRIKE_PRICE}')
+    matplotlib.pyplot.title(f'Puts with starting price: {PRICE} and strike price: {STRIKE_PRICE}')
     matplotlib.pyplot.scatter(X, Y, color="red", label="Y (actual value that was gotten later (discounted, exercise later)")
     matplotlib.pyplot.scatter(X, continuation, label="continuation, theoretical", marker="x", color="blue")
     matplotlib.pyplot.scatter(X, exercise, label="exercise now", marker="+", color="green")
