@@ -5,14 +5,14 @@ import statsmodels.api
 import math
 from scipy.misc import derivative
 
-N = 100 # number of time steps, number of discretization points, time points that the option can be exercised
+N = 1000 # number of time steps, number of discretization points, time points that the option can be exercised
 M = 1000 # number of paths of the underlying asset
 BF = 20 # number of basis functions used, pandas cannot handle more than 20
 T = 1 # time from 'now' to expiration of option in years 
 dt = T/N # time between each time step 
 
 PRICE = 1 # stock price 
-STRIKE_PRICE = 1.1
+STRIKE_PRICE = 1.0
 
 # initialize table with stock price
 TABLE = numpy.zeros((M, N + 1))
@@ -28,7 +28,7 @@ for i in range(1, N + 1):
     dS = TABLE[:, i - 1] * ((r * dt) + (sigma * dZ)) 
     TABLE[:, i] = TABLE[:, i -1] + dS
 
-print(TABLE)
+# print(TABLE)
 n = BF
 
 # part of laguerre weighted polynomial function 
@@ -38,6 +38,10 @@ def f(X):
 # creation of dataframe data type in order to 
 # use with stats model functions 
 TABLE_DF = pandas.DataFrame(TABLE)
+TABLE_DF.transpose().plot(color="red", alpha=0.1)
+matplotlib.pyplot.legend([])
+matplotlib.pyplot.plot([0,N], [STRIKE_PRICE, STRIKE_PRICE], label="strke price")
+matplotlib.pyplot.show()
 
 # loop for backward induction on each time step from N to 0
 # this is for call options
@@ -60,9 +64,9 @@ for i in range(1, N):
 
     # see eq 5 in longstaff-schwartz 2001
     # polys are recreated at each iteration because indicies may change
-    for i in range(0, n):
-        n = i
-        poly[i] = numpy.exp(-X/2) * numpy.exp(X) / math.factorial(i) * derivative(f, X, dx=1e-6, n=i, order=BF+1)
+    for z in range(0, n):
+        n = z
+        poly[z] = numpy.exp(-X/2) * numpy.exp(X) / math.factorial(z) * derivative(f, X, dx=1e-6, n=z, order=BF+1)
 
     # stats model 
     model = statsmodels.api.OLS(Y, poly)
@@ -77,7 +81,7 @@ for i in range(1, N):
     # see eq 6 in Longstaff, Schwartz 2001
     for p in range(0, n):
         y += poly[p] * coef[p]
-    x = numpy.linspace(0.5, 1.2, len(y))
+    x = numpy.linspace(1.0, 2.5, len(y))
     continued = continuation < exercise
     continued = continued.reindex(TABLE_DF.index).fillna(True)
     print(continued)
@@ -88,6 +92,7 @@ for i in range(1, N):
     matplotlib.pyplot.plot(x,y, linestyle=":", color="blue")
     matplotlib.pyplot.xlabel("price at N - 1", fontdict=None, labelpad=None, loc=None)
     matplotlib.pyplot.ylabel("amount profit at N", fontdict=None, labelpad=None, loc=None)
+    matplotlib.pyplot.title(f'Calls with starting price: {PRICE} and strike price: {STRIKE_PRICE}')
     matplotlib.pyplot.scatter(X, Y, color="red", label="Y (actual value that was gotten later (discounted, exercise later)")
     matplotlib.pyplot.scatter(X, continuation, label="continuation, theoretical", marker="x", color="blue")
     matplotlib.pyplot.scatter(X, exercise, label="exercise now", marker="+", color="green")
