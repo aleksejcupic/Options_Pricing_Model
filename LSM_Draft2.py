@@ -45,6 +45,11 @@ for i in range(1, N - 1):
     print(i)
     # Y is the array of profit at time step N - i 
     Y = (STRIKE_PRICE - TABLE_DF[N - i]).map(lambda v: max(v, 0))
+
+    # discount the payoff 
+    discount = numpy.exp(-r * 1)
+    Y = Y * discount
+
     # X is the price of each path at time N - i
     X = TABLE_DF[N - i]
     # IN_THE_MONEY is an array at time N - i that shows T/F
