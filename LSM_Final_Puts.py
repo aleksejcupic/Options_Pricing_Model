@@ -80,7 +80,7 @@ for i in range(1, N):
     y = 0
     # see eq 6 in Longstaff, Schwartz 2001
     for p in range(0, n):
-        y += poly[p] * coef[p]
+        y += poly[x] * coef[p]
     x = numpy.linspace(0.5, 1.2, len(y))
     continued = continuation > exercise
     continued = continued.reindex(TABLE_DF.index).fillna(True)
