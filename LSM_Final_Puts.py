@@ -79,6 +79,7 @@ for i in range(1, N):
 
     y = 0
     # see eq 6 in Longstaff, Schwartz 2001
+    # x = numpy.linspace(.5, 1.5, 100)
     for p in range(0, n):
         y += poly[p] * coef[p]
     x = numpy.linspace(0.5, 1.2, len(y))
