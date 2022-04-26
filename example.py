@@ -40,11 +40,9 @@ Y = Y[ITM]
 
 poly = pd.DataFrame(index=X.index)
 
-poly[0] = 1
-poly[1] = np.cos(X)
-poly[2] = np.sin(X)
-# poly[3] = np.cos(2*X)
-# poly[4] = np.sin(2*X)
+poly[0] = np.exp(-X/2)
+poly[1] = np.exp(-X/2) *(1-X)
+poly[2] = np.exp(-X/2) * (1 - 2 * X + X ** 2 / 2)
 
 model = sm.OLS(Y, poly)
 res = model.fit()
@@ -55,7 +53,7 @@ continuation = (poly * coef).sum(axis=1)
 exercise = (k - df[N-1][ITM])
 
 x = np.linspace(.5, 1.5, 100)
-y = 1 * coef[0] + np.cos(x) * coef[1] + np.sin(x) * coef[2]
+y = np.exp(-x/2) * coef[0] + np.exp(-x/2) * (1-x) * coef[1] + np.exp(-x/2) * (1 - 2 * x + x ** 2 / 2) * coef[2]
 
 plt.figure(figsize=(5,5))
 plt.plot(x,y, linestyle=":", color="blue")
