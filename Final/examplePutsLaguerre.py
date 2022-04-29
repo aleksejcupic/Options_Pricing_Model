@@ -66,7 +66,7 @@ x = np.linspace(.5, 1.5, 100)
 y = np.exp(-x/2) * coef[0] + np.exp(-x/2) * (1 - x) * coef[1] + np.exp(-x/2) * (1 - 2*x + x**2/2) * coef[2]
 
 # plotting 
-plt.figure(figsize=(10,10))
+plt.figure(figsize=(5,5))
 plt.plot(x,y, linestyle=":", color="blue")
 plt.xlabel(f"price at {N-1}", fontdict=None, labelpad=None, loc=None)
 plt.ylabel(f"amount profit at {N}", fontdict=None, labelpad=None, loc=None)

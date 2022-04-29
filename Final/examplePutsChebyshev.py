@@ -66,10 +66,10 @@ x = np.linspace(.5, 1.5, 100)
 
 # basis functions on y 
 # TODO: SETTING BASIS FUNCTIONS 
-y = 1 * coef[0] + x * coef[1] + ((2 * (x ** 2)) - 1) * coef[2] + ((4 * (X ** 3)) - (3 * X)) * coef[3] + ((8 * (X ** 4)) - (8 * (X ** 2)) + 1) * coef[4] + ((16 * (X ** 5)) - (20 * (X ** 3)) + (5 * X)) * coef[5]
+y = 1 * coef[0] + x * coef[1] + ((2 * (x ** 2)) - 1) * coef[2] + ((4 * (x ** 3)) - (3 * x)) * coef[3] + ((8 * (x ** 4)) - (8 * (x ** 2)) + 1) * coef[4] + ((16 * (x ** 5)) - (20 * (x ** 3)) + (5 * x)) * coef[5]
 
 # plotting 
-plt.figure(figsize=(10,10))
+plt.figure(figsize=(5,5))
 plt.plot(x,y, linestyle=":", color="blue")
 plt.xlabel(f"price at {N-1}", fontdict=None, labelpad=None, loc=None)
 plt.ylabel(f"amount profit at {N}", fontdict=None, labelpad=None, loc=None)
