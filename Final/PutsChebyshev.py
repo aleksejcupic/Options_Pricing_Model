@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
 # PUTS USING CHEBYSHEV POLYNOMIALS 
-N = 1000 # number of time steps, number of discretization points, time points that the option can be exercised
-M = 1000 # number of paths of the underlying asset
+N = 100 # number of time steps, number of discretization points, time points that the option can be exercised
+M = 100 # number of paths of the underlying asset
 BF = 20 # number of basis functions used, pandas cannot handle more than 20
 T = 1 # time from 'now' to expiration of option in years 
 dt = T/N # time between each time step 
@@ -54,9 +54,9 @@ poly = pd.DataFrame(index=X.index)
 poly[0] = 1
 poly[1] = X
 poly[2] = (2 * (X ** 2)) - 1
-poly[3] = (4 * (X ** 3)) - (3 * X)
-poly[4] = (8 * (X ** 4)) - (8 * (X ** 2)) + 1
-poly[5] = (16 * (X ** 5)) - (20 * (X ** 3)) + (5 * X)
+# poly[3] = (4 * (X ** 3)) - (3 * X)
+# poly[4] = (8 * (X ** 4)) - (8 * (X ** 2)) + 1
+# poly[5] = (16 * (X ** 5)) - (20 * (X ** 3)) + (5 * X)
 
 
 # stats models 
@@ -73,7 +73,7 @@ x = np.linspace(.5, 1.5, 100)
 
 # basis functions on y 
 # TODO: SETTING BASIS FUNCTIONS 
-y = 1 * coef[0] + x * coef[1] + ((2 * (x ** 2)) - 1) * coef[2] + ((4 * (X ** 3)) - (3 * X)) * coef[3] + ((8 * (X ** 4)) - (8 * (X ** 2)) + 1) * coef[4] + ((16 * (X ** 5)) - (20 * (X ** 3)) + (5 * X)) * coef[5]
+y = 1 * coef[0] + x * coef[1] + ((2 * (x ** 2)) - 1) * coef[2] #+ ((4 * (X ** 3)) - (3 * X)) * coef[3] + ((8 * (X ** 4)) - (8 * (X ** 2)) + 1) * coef[4] + ((16 * (X ** 5)) - (20 * (X ** 3)) + (5 * X)) * coef[5]
 
 # plotting 
 plt.figure(figsize=(10,10))
@@ -81,8 +81,8 @@ plt.plot(x,y, linestyle=":", color="blue")
 plt.xlabel(f"price at {N-1}", fontdict=None, labelpad=None, loc=None)
 plt.ylabel(f"amount profit at {N}", fontdict=None, labelpad=None, loc=None)
 plt.title(f'Puts with starting price: {PRICE} and strike price: {STRIKE_PRICE}')
-plt.scatter(X, Y, color="red", label="Y (discounted exercise later, actual value that was gotten later)")
+plt.scatter(X, Y, marker="o",color="orange", label="Y (discounted exercise later, actual value that was gotten later)")
 plt.scatter(X, continuation, label="continuation, theoretical", marker="x", color="blue")
-plt.scatter(X, exercise, label="exercise now", marker="+", color="green")
+plt.scatter(X, exercise, label="exercise now", marker="x", color="black")
 plt.legend()
 plt.show()

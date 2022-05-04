@@ -25,8 +25,11 @@ TABLE = pd.DataFrame(paths, index=range(1, len(paths)+1))
 mu = 0.06
 
 # "brownian motion" graph 
-TABLE.transpose().plot(color="red", alpha=0.3)
+TABLE.transpose().plot(color="black", alpha=0.3)
 plt.legend([])
+plt.xlabel("time", fontdict=None, labelpad=None, loc=None)
+plt.ylabel("price of underlying asset", fontdict=None, labelpad=None, loc=None)
+plt.title(f'Puts with starting price: {PRICE} and strike price: {STRIKE_PRICE}')
 plt.plot([0,N], [STRIKE_PRICE, STRIKE_PRICE], label="strike price")
 plt.show()
 
@@ -47,9 +50,9 @@ poly = pd.DataFrame(index=X.index)
 poly[0] = 1
 poly[1] = X
 poly[2] = (2 * (X ** 2)) - 1
-poly[3] = (4 * (X ** 3)) - (3 * X)
-poly[4] = (8 * (X ** 4)) - (8 * (X ** 2)) + 1
-poly[5] = (16 * (X ** 5)) - (20 * (X ** 3)) + (5 * X)
+# poly[3] = (4 * (X ** 3)) - (3 * X)
+# poly[4] = (8 * (X ** 4)) - (8 * (X ** 2)) + 1
+# poly[5] = (16 * (X ** 5)) - (20 * (X ** 3)) + (5 * X)
 
 
 # stats models 
@@ -66,7 +69,11 @@ x = np.linspace(.5, 1.5, 100)
 
 # basis functions on y 
 # TODO: SETTING BASIS FUNCTIONS 
+<<<<<<< Updated upstream
 y = 1 * coef[0] + x * coef[1] + ((2 * (x ** 2)) - 1) * coef[2] + ((4 * (x ** 3)) - (3 * x)) * coef[3] + ((8 * (x ** 4)) - (8 * (x ** 2)) + 1) * coef[4] + ((16 * (x ** 5)) - (20 * (x ** 3)) + (5 * x)) * coef[5]
+=======
+y = 1 * coef[0] + x * coef[1] + ((2 * (x ** 2)) - 1) * coef[2] + ((4 * (x ** 3)) - (3 * x)) * coef[3]
+>>>>>>> Stashed changes
 
 # plotting 
 plt.figure(figsize=(5,5))
